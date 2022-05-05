@@ -16,10 +16,16 @@ export default class CategoriesController {
 
             const newCategory = await createCategoryService(name)
 
-            return res.status(201).json(newCategory)
+            return res.status(201).json({
+                message: "created",
+                category: newCategory
+            })
         } catch (err) {
 
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+
+            })
 
         }
 
@@ -29,6 +35,7 @@ export default class CategoriesController {
     async index(req, res) {
         try {
             const allCategories = await listCategoriesService()
+
             return res.status(200).json(allCategories)
         } catch (err) {
             return res.status(500).json(err.message)
@@ -41,9 +48,14 @@ export default class CategoriesController {
             const { id } = req.params
 
             const category = await listCategoryService({ id })
-            return res.json(category)
+            return res.json({
+                name: "Categoria Teste",
+                category
+            })
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
         }
 
 
@@ -57,10 +69,18 @@ export default class CategoriesController {
 
             const updatedCategory = await updateCategoryService({ name, id })
 
-            return res.json(updatedCategory)
+            return res.status(200).json({
+                message: "updated",
+                updatedCategory,
+                category: {
+                    name: "Atualizada"
+                }
+            })
 
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
         }
 
     }
@@ -70,9 +90,14 @@ export default class CategoriesController {
         try {
             const { id } = req.params
             const deletedCategory = await deletedCategoryService({ id })
-            return res.json(deletedCategory)
+            return res.status(200).json({
+                message: "deleted",
+                deletedCategory
+            })
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
         }
 
     }

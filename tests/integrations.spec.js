@@ -54,7 +54,7 @@ describe("Testing success cases in the routes", () => {
   it("Should be able to create a product", async () => {
     const response = await request(app).post("/products").send(testProduct);
 
-    testProduct.id = response.body.product.id;
+    // testProduct.id = response.body.product.id;
 
     expect(response.status).toBe(201);
     expect(response.body.message).toBeDefined();

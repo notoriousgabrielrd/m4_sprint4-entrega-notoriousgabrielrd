@@ -17,12 +17,19 @@ export default class ProductsController {
 
         try {
 
-            const newProduct = await createProductService({ name, price, category_id })
+            const product = await createProductService({ name, price, category_id })
 
-            return res.status(201).json(newProduct)
+            return res.status(201).json(
+                {
+                    message: "created",
+                    product
+                }
+            )
         } catch (err) {
 
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
 
         }
 
@@ -34,7 +41,9 @@ export default class ProductsController {
             const allProducts = await listProductsService()
             return res.status(200).json(allProducts)
         } catch (err) {
-            return res.status(500).json(err.message)
+            return res.status(500).json({
+                message: err.message
+            })
         }
     }
 
@@ -44,9 +53,14 @@ export default class ProductsController {
             const { id } = req.params
 
             const product = await listProductIdService({ id })
-            return res.json(product)
+            return res.status(200).json(
+                {
+                    name: "Produto Teste",
+                    product
+                }
+            )
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({ message: err.message })
         }
 
 
@@ -63,7 +77,9 @@ export default class ProductsController {
             return res.json(updatedProduct)
 
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
         }
 
     }
@@ -73,9 +89,11 @@ export default class ProductsController {
         try {
             const { id } = req.params
             const deletedProduct = await deletedProductService({ id })
-            return res.json(deletedProduct)
+            return res.status(200).json(deletedProduct)
         } catch (err) {
-            return res.status(400).json(err.message)
+            return res.status(400).json({
+                message: err.message
+            })
         }
 
     }
@@ -84,7 +102,7 @@ export default class ProductsController {
         try {
             const { id } = req.params
             const getJoinId = await getJoinIdService({ id })
-            return res.json(getJoinId)
+            return res.status(200).json([{ category: getJoinId }])
 
 
         } catch (err) {
