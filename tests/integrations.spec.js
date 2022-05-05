@@ -8,9 +8,8 @@ describe("Testing success cases in the routes", () => {
 
   let testProduct = {
     name: `Produto Teste ${Math.floor(Math.random() * 10001)}`,
-    price: `${Math.floor(Math.random() * 1001)}.${
-      Math.floor(Math.random() * 90) + 10
-    }`,
+    price: `${Math.floor(Math.random() * 1001)}.${Math.floor(Math.random() * 90) + 10
+      }`,
   };
 
   it("Should be able to create a new category", async () => {
@@ -129,9 +128,8 @@ describe("Testing error cases in the routes", () => {
 
   let testProduct = {
     name: `Produto Teste ${Math.floor(Math.random() * 10001)}`,
-    price: `${Math.floor(Math.random() * 1001)}.${
-      Math.floor(Math.random() * 90) + 10
-    }`,
+    price: `${Math.floor(Math.random() * 1001)}.${Math.floor(Math.random() * 90) + 10
+      }`,
   };
 
   it("Should not be able to create two categories with the same name", async () => {
