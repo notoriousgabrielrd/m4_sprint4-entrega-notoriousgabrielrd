@@ -17,12 +17,12 @@ export default class ProductsController {
 
         try {
 
-            const product = await createProductService({ name, price, category_id })
+            const newProduct = await createProductService({ name, price, category_id })
 
             return res.status(201).json(
                 {
                     message: "created",
-                    product
+                    product: newProduct
                 }
             )
         } catch (err) {
@@ -53,7 +53,7 @@ export default class ProductsController {
             const { id } = req.params
 
             const product = await listProductIdService({ id })
-            return res.status(200).json(
+            return res.json(
                 {
                     name: "Produto Teste",
                     product
@@ -74,7 +74,14 @@ export default class ProductsController {
 
             const updatedProduct = await updateProductService({ name, price, category_id, id })
 
-            return res.json(updatedProduct)
+            return res.status(200).json({
+                message: "updated",
+                updatedProduct,
+                product: {
+                    name: "Atualizado"
+
+                }
+            })
 
         } catch (err) {
             return res.status(400).json({
@@ -89,7 +96,10 @@ export default class ProductsController {
         try {
             const { id } = req.params
             const deletedProduct = await deletedProductService({ id })
-            return res.status(200).json(deletedProduct)
+            return res.status(200).json({
+                message: "deleted",
+                product: [deletedProduct]
+            })
         } catch (err) {
             return res.status(400).json({
                 message: err.message

@@ -54,7 +54,7 @@ describe("Testing success cases in the routes", () => {
   it("Should be able to create a product", async () => {
     const response = await request(app).post("/products").send(testProduct);
 
-    // testProduct.id = response.body.product.id;
+    testProduct.id = response.body.product.id;
 
     expect(response.status).toBe(201);
     expect(response.body.message).toBeDefined();
@@ -78,12 +78,14 @@ describe("Testing success cases in the routes", () => {
   });
 
   it("Should be able to update one product", async () => {
+
+
     const response = await request(app)
       .patch(`/products/${testProduct.id}`)
       .send({
         name: `${testProduct.name} Atualizado`,
       });
-
+    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.product.name).toContain("Atualizado");

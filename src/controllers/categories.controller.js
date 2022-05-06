@@ -92,7 +92,7 @@ export default class CategoriesController {
             const deletedCategory = await deletedCategoryService({ id })
             return res.status(200).json({
                 message: "deleted",
-                deletedCategory
+                category: [deletedCategory]
             })
         } catch (err) {
             return res.status(400).json({
