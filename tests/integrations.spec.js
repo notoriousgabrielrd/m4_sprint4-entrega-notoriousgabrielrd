@@ -85,7 +85,6 @@ describe("Testing success cases in the routes", () => {
       .send({
         name: `${testProduct.name} Atualizado`,
       });
-    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.product.name).toContain("Atualizado");
