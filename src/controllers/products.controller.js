@@ -71,8 +71,10 @@ export default class ProductsController {
         try {
             const { id } = req.params
             const { name, price, category_id } = req.body
+            const toUpdateInfo = { name, price, category_id }
 
-            const updatedProduct = await updateProductService({ name, price, category_id, id })
+            const updatedProduct = await updateProductService(toUpdateInfo, id)
+
 
             return res.status(200).json({
                 message: "updated",
