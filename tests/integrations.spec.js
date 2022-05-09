@@ -8,9 +8,8 @@ describe("Testing success cases in the routes", () => {
 
   let testProduct = {
     name: `Produto Teste ${Math.floor(Math.random() * 10001)}`,
-    price: `${Math.floor(Math.random() * 1001)}.${
-      Math.floor(Math.random() * 90) + 10
-    }`,
+    price: `${Math.floor(Math.random() * 1001)}.${Math.floor(Math.random() * 90) + 10
+      }`,
   };
 
   it("Should be able to create a new category", async () => {
@@ -79,12 +78,15 @@ describe("Testing success cases in the routes", () => {
   });
 
   it("Should be able to update one product", async () => {
+
+
     const response = await request(app)
       .patch(`/products/${testProduct.id}`)
       .send({
         name: `${testProduct.name} Atualizado`,
       });
 
+    console.log(response.body)
     expect(response.status).toBe(200);
     expect(response.body.message).toBeDefined();
     expect(response.body.product.name).toContain("Atualizado");
@@ -129,9 +131,8 @@ describe("Testing error cases in the routes", () => {
 
   let testProduct = {
     name: `Produto Teste ${Math.floor(Math.random() * 10001)}`,
-    price: `${Math.floor(Math.random() * 1001)}.${
-      Math.floor(Math.random() * 90) + 10
-    }`,
+    price: `${Math.floor(Math.random() * 1001)}.${Math.floor(Math.random() * 90) + 10
+      }`,
   };
 
   it("Should not be able to create two categories with the same name", async () => {

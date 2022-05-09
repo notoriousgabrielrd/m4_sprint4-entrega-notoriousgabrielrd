@@ -1,0 +1,35 @@
+version: "3.9"
+
+services:
+  produtos_categorias:
+    container_name: entg_s4
+    image: produtos_categorias
+    build: .
+    ports:
+      - 3333:3333
+    environment:
+      - DB_USERNAME=supergabrielrd
+      - DB_PASSWORD=34211055
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB=defaultdb
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    container_name: db
+    image: postgres:12
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=supergabrielrd
+      - POSTGRES_PASSWORD=34211055
+      - POSTGRES_DB=defaultdb
+    healthcheck:
+      test: psql -U supergabrielrd defaultdb || exit 1
+      interval: 1s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    volumes:
+      - ./create_tables.sql:/docker-entrypoint-initdb.d/create_tables.sql
